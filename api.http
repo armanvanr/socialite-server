@@ -1,0 +1,11 @@
+### Auth
+POST http://localhost:3001/auth/register
+Content-Type: application/json
+Accept: application/json
+
+{
+    "firstName": "fake",
+    "lastName": "name",
+    "email": "fakeemail@gmail.com",
+    "password": "123456abcd"
+}
