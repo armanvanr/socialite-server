@@ -48,26 +48,31 @@ posts.post('/posts', async (req, res) => {
 
 posts.get('/posts', async (req, res) => {
     try {
-        Post.find()
-            .then(p => {
-                const content = p.content;
-                const image = p.image;
-                const user = User.findById(p.user_id);
-                const postData = {
-                    firstName: user.first_name,
-                    lastName: user.last_name,
-                    content,
-                    image,
+        let postData = []
+        const posts = await Post.find()
+
+        const users = await User.find()
+        posts.map(post => {
+            users.map(user => {
+                if (post.user_id.toString() == user._id.toString()) {
+                    postData.push({
+                        firstName: user.first_name,
+                        lastName: user.last_name,
+                        content: post.content,
+                        image: post.image,
+                    })
                 }
-                return postData;
             })
-            .catch(err => {
-                res.send(err);
-            })
-        const posts = postData;
-        res.status(200).json(posts);
+        });
+        res.status(200).json({ postData })
+
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
+})
+
+posts.get('/postss', async (req, res) => {
+    result = await User.findById("63a2a6841cd536c56f99d9e5")
+    console.log('result', result)
 })
 module.exports = posts;
