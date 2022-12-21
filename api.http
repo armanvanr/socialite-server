@@ -29,3 +29,8 @@ Accept: application/json
     "content": "tes 2",
     "image": ""
 }
+
+### get all posts
+GET http://localhost:3001/posts
+Content-Type: application/json
+Accept: application/json
