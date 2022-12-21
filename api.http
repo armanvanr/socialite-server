@@ -1,11 +1,31 @@
 ### Auth
-POST http://localhost:3001/auth/register
+POST http://localhost:3001/register
 Content-Type: application/json
 Accept: application/json
 
 {
-    "firstName": "fake",
-    "lastName": "name",
-    "email": "fakeemail@gmail.com",
-    "password": "123456abcd"
+    "firstName": "random",
+    "lastName": "Boy",
+    "email": "12345@gmail.com",
+    "password": "123asd456"
+}
+
+###
+POST http://localhost:3001/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "124@gmail.com",
+    "password": "123asd456"
+}
+
+### create post
+POST http://localhost:3001/posts
+Content-Type: application/json
+Accept: application/json
+
+{
+    "content": "tes 2",
+    "image": ""
 }

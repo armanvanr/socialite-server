@@ -1,14 +1,14 @@
-import mongoose, { Schema } from 'mongoose';
+const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema(
     {
-        firstName: {
+        first_name: {
             type: String,
             required: true,
             min: 2,
             max: 50,
         },
-        lastName: {
+        last_name: {
             type: String,
             required: true,
             min: 2,
@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema(
             required: true,
             min: 5,
         },
-        picturePath: {
+        avatar: {
             type: String,
             default: "",
         },
@@ -36,11 +36,16 @@ const UserSchema = new mongoose.Schema(
         location: String,
         occupation: String,
         viewedProfile: Number,
-        impressions: Number,
     },
     { timestamps: true }
 );
 
-const User =mongoose.model("User", UserSchema);
+// UserSchema.virtual("user_id").get(function () {
+//     return this._id.toHexString();
+// });
 
-export default User;
+// UserSchema.set("toJSON", {
+//     virtuals: true,
+// });
+
+module.exports = mongoose.model("User", UserSchema);
