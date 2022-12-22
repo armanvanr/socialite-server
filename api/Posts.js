@@ -49,11 +49,11 @@ posts.post('/posts', async (req, res) => {
 posts.get('/posts', async (req, res) => {
     try {
         let postData = []
-        const posts = await Post.find()
+        const Posts = await Post.find()
+        const Users = await User.find()
 
-        const users = await User.find()
-        posts.map(post => {
-            users.map(user => {
+        Posts.map(post => {
+            Users.map(user => {
                 if (post.user_id.toString() == user._id.toString()) {
                     postData.push({
                         firstName: user.first_name,
@@ -64,7 +64,7 @@ posts.get('/posts', async (req, res) => {
                 }
             })
         });
-        res.status(200).json({ postData })
+        res.status(200).json({ posts: postData })
 
     } catch (err) {
         res.status(400).json({ error: err.message });
