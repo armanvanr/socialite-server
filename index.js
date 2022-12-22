@@ -13,7 +13,7 @@ const app = express();
 dotenv.config();
 app.use(cors());
 app.use(express.json());
-app.use(bodyParser.json({ limit: '500kb' }));
+app.use(bodyParser.json({ limit: '50mb', extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
