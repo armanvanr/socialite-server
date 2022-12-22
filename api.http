@@ -31,6 +31,6 @@ Accept: application/json
 }
 
 ### get all posts
-GET http://localhost:3001/posts
+GET http://https://socialite-server-muriowiw2-armanvenska.vercel.app//posts
 Content-Type: application/json
 Accept: application/json
