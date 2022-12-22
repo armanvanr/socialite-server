@@ -1,15 +1,14 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import multer from 'multer';
-import helmet from 'helmet';
-import morgan from 'morgan';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import exp from 'constants';
-import mongoose from 'mongoose';
-import { register } from './controllers/auth.js';
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+const Users = require('./api/Users');
+const Posts = require('./api/Posts');
+const Comments=require('./api/Comments')
+const path = require('path');
+const public = __dirname + "/public/";
+const app = express();
 
 //Configurations
 const __filename = fileURLToPath(import.meta.url);
@@ -37,12 +36,17 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 //Routes
-app.post('/auth/register', upload.single("picture"), register);
+const routes = [Users, Posts, Comments];
+app.use('/', routes)
+
+app.get('/', function (req, res) {
+    res.sendFile(path.join(public + "index.html"));
+});
 
 //Mongoose Setup
 const PORT = process.env.PORT || 6001;
 mongoose.set('strictQuery', false);
-mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect(process.env.MONGO_URL_LOCAL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
